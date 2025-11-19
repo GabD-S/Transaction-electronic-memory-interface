@@ -1,481 +1,14 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CloudDApp - Armazenamento Descentralizado</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<!-- O layout Rails já inclui os arquivos SCSS e JS -->
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(180deg, #e0f7ff 0%, #b3e5fc 50%, #81d4fa 100%);
-            color: #01579b;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
 
-        /* Oceano animado de fundo */
-        .ocean {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .wave {
-            <div data-controller="background">
-        }
-
-        .wave:nth-child(3) {
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="%2381d4fa" fill-opacity="0.15"/></svg>') repeat-x;
-            animation: wave 25s linear infinite;
-            top: 40px;
-        }
-
-        @keyframes wave {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-            </div>
-                transform: translateX(-50%);
-            }
-        }
-
-        /* Bolhas flutuantes */
-        .bubbles {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .bubble {
-            position: absolute;
-            bottom: -100px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.8), rgba(173, 216, 230, 0.3));
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: rise linear infinite;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-        }
-
-        @keyframes rise {
-            to {
-                transform: translateY(-120vh) translateX(50px);
-                opacity: 0;
-            }
-        }
-
-        /* Peixes nadando */
-        .fish {
-            position: fixed;
-            font-size: 3em;
-            z-index: 0;
-            animation: swim 30s linear infinite;
-            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
-        }
-
-        @keyframes swim {
-            0% {
-                transform: translateX(-100px) scaleX(1);
-            }
-            49% {
-                transform: translateX(100vw) scaleX(1);
-            }
-            50% {
-                transform: translateX(100vw) scaleX(-1);
-            }
-            99% {
-                transform: translateX(-100px) scaleX(-1);
-            }
-            100% {
-                transform: translateX(-100px) scaleX(1);
-            }
-        }
-
-        /* Container principal */
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Header */
-        header {
-            text-align: center;
-            padding: 60px 20px 40px;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(15px);
-            border-radius: 30px;
-            margin-bottom: 40px;
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        h1 {
-            font-size: 3.5em;
-            background: linear-gradient(45deg, #0288d1, #29b6f6, #4fc3f7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .subtitle {
-            font-size: 1.2em;
-            color: #0277bd;
-            margin-top: 10px;
-        }
-
-        /* Seções principais */
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .section {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(15px);
-            border-radius: 25px;
-            padding: 35px;
-            border: 3px solid rgba(41, 182, 246, 0.5);
-            transition: all 0.4s ease;
-            animation: fadeIn 1s ease-out;
-            box-shadow: 0 10px 30px rgba(41, 182, 246, 0.2);
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .section:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(41, 182, 246, 0.4);
-            border-color: #29b6f6;
-        }
-
-        .section h2 {
-            font-size: 2em;
-            margin-bottom: 25px;
-            color: #0288d1;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .icon {
-            font-size: 1.5em;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #01579b;
-            font-weight: 600;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid rgba(41, 182, 246, 0.4);
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.9);
-            color: #01579b;
-            font-size: 1em;
-            transition: all 0.3s ease;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #29b6f6;
-            box-shadow: 0 0 20px rgba(41, 182, 246, 0.4);
-            transform: scale(1.02);
-        }
-
-        button {
-            width: 100%;
-            padding: 18px;
-            border: none;
-            border-radius: 15px;
-            background: linear-gradient(135deg, #29b6f6, #4fc3f7, #81d4fa);
-            color: #fff;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(41, 182, 246, 0.4);
-        }
-
-        button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        button:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(41, 182, 246, 0.6);
-        }
-
-        button:active {
-            transform: translateY(-1px);
-        }
-
-        /* Marketplace */
-        .marketplace {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(15px);
-            border-radius: 25px;
-            padding: 35px;
-            border: 3px solid rgba(41, 182, 246, 0.5);
-            box-shadow: 0 10px 30px rgba(41, 182, 246, 0.2);
-        }
-
-        .marketplace h2 {
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            color: #0288d1;
-            text-align: center;
-        }
-
-        .offers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-
-        .offer-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(225, 245, 254, 0.95));
-            border: 3px solid rgba(41, 182, 246, 0.5);
-            border-radius: 20px;
-            padding: 25px;
-            transition: all 0.4s ease;
-            animation: slideIn 0.6s ease-out;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(41, 182, 246, 0.2);
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .offer-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(41, 182, 246, 0.1), transparent);
-            animation: rotate 10s linear infinite;
-        }
-
-        @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .offer-card:hover {
-            transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 15px 40px rgba(41, 182, 246, 0.4);
-            border-color: #29b6f6;
-        }
-
-        .offer-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .offer-type {
-            background: linear-gradient(135deg, #29b6f6, #4fc3f7);
-            color: #fff;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: bold;
-            box-shadow: 0 3px 10px rgba(41, 182, 246, 0.3);
-        }
-
-        .offer-status {
-            width: 12px;
-            height: 12px;
-            background: #4caf50;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-            box-shadow: 0 0 10px #4caf50;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.6;
-                transform: scale(1.2);
-            }
-        }
-
-        .offer-details {
-            position: relative;
-            z-index: 1;
-        }
-
-        .offer-detail {
-            margin: 10px 0;
-            color: #0277bd;
-        }
-
-        .offer-detail strong {
-            color: #01579b;
-        }
-
-        .accept-btn {
-            margin-top: 15px;
-            padding: 12px;
-            font-size: 0.95em;
-        }
-
-        /* Responsivo */
-        @media (max-width: 968px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-
-            h1 {
-                font-size: 2.5em;
-            }
-        }
-
-        /* Notificação */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #29b6f6, #4fc3f7);
-            color: #fff;
-            padding: 20px 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(41, 182, 246, 0.5);
-            transform: translateX(400px);
-            transition: transform 0.5s ease;
-            z-index: 1000;
-            font-weight: bold;
-        }
-
-        .notification.show {
-            transform: translateX(0);
-        }
-
-        /* Scroll parallax */
-        .parallax-layer {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-    </style>
-</head>
-<body>
+<div data-controller="background">
     <div class="ocean">
         <div class="wave"></div>
         <div class="wave"></div>
         <div class="wave"></div>
     </div>
+</div>
 
-    <div class="bubbles" id="bubbles"></div>
-
-    <div class="fish" style="top: 20%; animation-duration: 25s;">🐠</div>
-    <div class="fish" style="top: 40%; animation-duration: 35s; animation-delay: -10s;">🐟</div>
-    <div class="fish" style="top: 60%; animation-duration: 30s; animation-delay: -5s;">🐡</div>
-    <div class="fish" style="top: 75%; animation-duration: 40s; animation-delay: -15s;">🦈</div>
-    <div class="fish" style="top: 85%; animation-duration: 28s; animation-delay: -20s;">🐙</div>
-    
     <div class="container">
         <header>
             <h1>🌊 CloudDApp</h1>
@@ -483,45 +16,42 @@
         </header>
 
         <div class="main-content">
-            <!-- Seção de Compra -->
             <div class="section">
                 <h2><span class="icon">🛒</span> Buscar Armazenamento</h2>
-                <form id="buyForm">
+                <form id="buyForm" data-controller="marketplace" data-action="submit->marketplace#buy">
                     <div class="form-group">
                         <label>💾 Espaço Necessário (GB)</label>
-                        <input type="number" id="buySpace" min="1" max="1000" value="10" required>
+                        <input type="number" id="buySpace" data-marketplace-target="buySpace" min="1" max="1000" value="10" required>
                     </div>
                     <div class="form-group">
                         <label>📅 Duração (meses)</label>
-                        <input type="number" id="buyDuration" min="1" max="24" value="6" required>
+                        <input type="number" id="buyDuration" data-marketplace-target="buyDuration" min="1" max="24" value="6" required>
                     </div>
                     <div class="form-group">
                         <label>💰 Orçamento Máximo (ETH)</label>
-                        <input type="number" id="buyBudget" step="0.01" min="0.01" value="0.1" required>
+                        <input type="number" id="buyBudget" data-marketplace-target="buyBudget" step="0.01" min="0.01" value="0.1" required>
                     </div>
                     <div class="form-group">
                         <label>📝 Requisitos</label>
-                        <textarea id="buyRequirements" rows="3" placeholder="Ex: Alta disponibilidade, baixa latência..."></textarea>
+                        <textarea id="buyRequirements" data-marketplace-target="buyRequirements" rows="3" placeholder="Ex: Alta disponibilidade, baixa latência..."></textarea>
                     </div>
                     <button type="submit">🔍 Buscar Provedores</button>
                 </form>
             </div>
-
-            <!-- Seção de Venda -->
             <div class="section">
                 <h2><span class="icon">💾</span> Oferecer Armazenamento</h2>
-                <form id="sellForm">
+                <form id="sellForm" data-controller="marketplace" data-action="submit->marketplace#sell">
                     <div class="form-group">
                         <label>📦 Espaço Disponível (GB)</label>
-                        <input type="number" id="sellSpace" min="1" max="10000" value="100" required>
+                        <input type="number" id="sellSpace" data-marketplace-target="sellSpace" min="1" max="10000" value="100" required>
                     </div>
                     <div class="form-group">
                         <label>💵 Preço por GB/mês (ETH)</label>
-                        <input type="number" id="sellPrice" step="0.001" min="0.001" value="0.01" required>
+                        <input type="number" id="sellPrice" data-marketplace-target="sellPrice" step="0.001" min="0.001" value="0.01" required>
                     </div>
                     <div class="form-group">
                         <label>🌍 Localização</label>
-                        <select id="sellLocation" required>
+                        <select id="sellLocation" data-marketplace-target="sellLocation" required>
                             <option value="br">🇧🇷 Brasil</option>
                             <option value="us">🇺🇸 Estados Unidos</option>
                             <option value="eu">🇪🇺 Europa</option>
@@ -530,7 +60,7 @@
                     </div>
                     <div class="form-group">
                         <label>⚡ Tipo de Armazenamento</label>
-                        <select id="sellType" required>
+                        <select id="sellType" data-marketplace-target="sellType" required>
                             <option value="ssd">💿 SSD</option>
                             <option value="hdd">💽 HDD</option>
                             <option value="nvme">⚡ NVMe</option>
@@ -541,157 +71,10 @@
             </div>
         </div>
 
-        <!-- Marketplace -->
         <div class="marketplace">
             <h2>🌐 Ofertas Ativas no Marketplace</h2>
-            <div class="offers-grid" id="offersGrid"></div>
+            <div class="offers-grid" id="offersGrid" data-marketplace-target="offersGrid"></div>
         </div>
     </div>
 
-    <div class="notification" id="notification"></div>
-
-    <script>
-        // Criar bolhas flutuantes
-        function createBubbles() {
-            const container = document.getElementById('bubbles');
-            for (let i = 0; i < 20; i++) {
-                const bubble = document.createElement('div');
-                bubble.className = 'bubble';
-                bubble.style.left = Math.random() * 100 + '%';
-                const size = Math.random() * 60 + 20;
-                bubble.style.width = size + 'px';
-                bubble.style.height = size + 'px';
-                bubble.style.animationDuration = (Math.random() * 10 + 8) + 's';
-                bubble.style.animationDelay = Math.random() * 5 + 's';
-                container.appendChild(bubble);
-            }
-        }
-        createBubbles();
-
-        // Efeito parallax no scroll
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const ocean = document.querySelector('.ocean');
-            const bubbles = document.getElementById('bubbles');
-            const fishes = document.querySelectorAll('.fish');
-            
-            ocean.style.transform = `translateY(${scrolled * 0.5}px)`;
-            bubbles.style.transform = `translateY(${scrolled * 0.3}px)`;
-            
-            fishes.forEach((fish, index) => {
-                fish.style.transform = `translateY(${scrolled * (0.2 + index * 0.1)}px)`;
-            });
-        });
-
-        // Dados de ofertas simuladas
-        let offers = [
-            { id: 1, type: 'sell', space: 50, price: 0.008, location: '🇧🇷 Brasil', storage: '💿 SSD', provider: 'Provider #A7F3' },
-            { id: 2, type: 'sell', space: 100, price: 0.012, location: '🇪🇺 Europa', storage: '⚡ NVMe', provider: 'Provider #B2K9' },
-            { id: 3, type: 'buy', space: 25, budget: 0.15, duration: 3, buyer: 'Buyer #C5X1' },
-            { id: 4, type: 'sell', space: 200, price: 0.009, location: '🇺🇸 EUA', storage: '💿 SSD', provider: 'Provider #D8M4' },
-            { id: 5, type: 'buy', space: 75, budget: 0.5, duration: 12, buyer: 'Buyer #E1P7' }
-        ];
-
-        function renderOffers() {
-            const grid = document.getElementById('offersGrid');
-            grid.innerHTML = '';
-            
-            offers.forEach((offer, index) => {
-                const card = document.createElement('div');
-                card.className = 'offer-card';
-                card.style.animationDelay = (index * 0.1) + 's';
-                
-                if (offer.type === 'sell') {
-                    card.innerHTML = `
-                        <div class="offer-header">
-                            <span class="offer-type">🏪 VENDA</span>
-                            <div class="offer-status"></div>
-                        </div>
-                        <div class="offer-details">
-                            <div class="offer-detail"><strong>👤 Provedor:</strong> ${offer.provider}</div>
-                            <div class="offer-detail"><strong>📦 Espaço:</strong> ${offer.space} GB</div>
-                            <div class="offer-detail"><strong>💰 Preço:</strong> ${offer.price} ETH/GB/mês</div>
-                            <div class="offer-detail"><strong>🌍 Local:</strong> ${offer.location}</div>
-                            <div class="offer-detail"><strong>⚡ Tipo:</strong> ${offer.storage}</div>
-                            <button class="accept-btn" onclick="acceptOffer(${offer.id}, 'sell')">✅ Aceitar Oferta</button>
-                        </div>
-                    `;
-                } else {
-                    card.innerHTML = `
-                        <div class="offer-header">
-                            <span class="offer-type">🛒 COMPRA</span>
-                            <div class="offer-status"></div>
-                        </div>
-                        <div class="offer-details">
-                            <div class="offer-detail"><strong>👤 Comprador:</strong> ${offer.buyer}</div>
-                            <div class="offer-detail"><strong>📦 Busca:</strong> ${offer.space} GB</div>
-                            <div class="offer-detail"><strong>💰 Orçamento:</strong> ${offer.budget} ETH</div>
-                            <div class="offer-detail"><strong>📅 Duração:</strong> ${offer.duration} meses</div>
-                            <button class="accept-btn" onclick="acceptOffer(${offer.id}, 'buy')">🤝 Fazer Proposta</button>
-                        </div>
-                    `;
-                }
-                
-                grid.appendChild(card);
-            });
-        }
-
-        function showNotification(message) {
-            const notif = document.getElementById('notification');
-            notif.textContent = message;
-            notif.classList.add('show');
-            setTimeout(() => {
-                notif.classList.remove('show');
-            }, 3000);
-        }
-
-        function acceptOffer(id, type) {
-            showNotification(type === 'sell' ? '✅ Negociação iniciada com provedor!' : '✅ Proposta enviada ao comprador!');
-        }
-
-        document.getElementById('buyForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const space = document.getElementById('buySpace').value;
-            const duration = document.getElementById('buyDuration').value;
-            const budget = document.getElementById('buyBudget').value;
-            
-            offers.push({
-                id: offers.length + 1,
-                type: 'buy',
-                space: parseInt(space),
-                budget: parseFloat(budget),
-                duration: parseInt(duration),
-                buyer: 'Buyer #' + Math.random().toString(36).substr(2, 4).toUpperCase()
-            });
-            
-            renderOffers();
-            showNotification('🎉 Sua solicitação foi publicada no marketplace!');
-            e.target.reset();
-        });
-
-        document.getElementById('sellForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const space = document.getElementById('sellSpace').value;
-            const price = document.getElementById('sellPrice').value;
-            const location = document.getElementById('sellLocation').options[document.getElementById('sellLocation').selectedIndex].text;
-            const storage = document.getElementById('sellType').options[document.getElementById('sellType').selectedIndex].text;
-            
-            offers.push({
-                id: offers.length + 1,
-                type: 'sell',
-                space: parseInt(space),
-                price: parseFloat(price),
-                location: location,
-                storage: storage,
-                provider: 'Provider #' + Math.random().toString(36).substr(2, 4).toUpperCase()
-            });
-            
-            renderOffers();
-            showNotification('🎉 Sua oferta foi publicada no marketplace!');
-            e.target.reset();
-        });
-
-        renderOffers();
-    </script>
-</body>
-</html>
+<div class="notification" id="notification" data-controller="notification" data-notification-target="box"></div>

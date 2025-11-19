@@ -1,5 +1,4 @@
 /* Estilos extraídos do index.html.erb para uso no Rails */
-@import "application";
 
 /* Cole aqui todo o conteúdo do <style> do HTML, ajustando se necessário para SCSS */
 
@@ -94,10 +93,10 @@ body {
 
 @keyframes swim {
   0% {
-    transform: translateX(-100px) scaleX(1);
+    transform: translateX(-100px) scaleX(-1);
   }
   49% {
-    transform: translateX(100vw) scaleX(1);
+    transform: translateX(100vw) scaleX(-1);
   }
   50% {
     transform: translateX(100vw) scaleX(-1);
@@ -106,7 +105,7 @@ body {
     transform: translateX(-100px) scaleX(-1);
   }
   100% {
-    transform: translateX(-100px) scaleX(1);
+    transform: translateX(-100px) scaleX(-1);
   }
 }
 
